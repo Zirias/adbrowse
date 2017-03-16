@@ -2,7 +2,7 @@ _DIRECTORIES :=
 
 define DIRRULES
 
-_$(T)_DIRS := $$(sort $$(dir $$(OUTFILES)))
+_$(T)_DIRS := $$(sort $$(patsubst %$$(PSEP),%,$$(dir $$(OUTFILES))))
 
 _NEWDIRS := $$(foreach _dir,$$(_$(T)_DIRS), \
 	$$(if $$(findstring $$(_dir),$$(_DIRECTORIES)),,$$(_dir)))
@@ -11,7 +11,7 @@ _DIRECTORIES += $$(_NEWDIRS)
 
 $$(_NEWDIRS):
 	$$(VMD)
-	$$(VR)$$(MDP) $$@
+	$$(VR)$$(foreach _dir,$$@,$$(MDP) $$(_dir) $$(CMDSEP))
 
 endef
 

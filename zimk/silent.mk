@@ -14,17 +14,17 @@ VGEN:=
 VGENT:=
 VR:=
 else
-VCC=	@echo "   [CC]   $@"
-VAS=	@echo "   [AS]   $@"
-VDEP=	@echo "   [DEP]  $@"
-VLD=	@echo "   [LD]   $@"
-VAR=	@echo "   [AR]   $@"
-VRES=   @echo "   [RES]  $@"
-VCCLD=	@echo "   [CCLD] $@"
-VSTRP=  @echo "   [STRP] $<"
-VMD=	@echo "   [MD]   $@"
-VGEN=	@echo "   [GEN]  $@"
-VGENT=	@echo "   [GEN]  $@: $(VTAGS)"
+VCC=	@echo $(EQT)   [CC]   $@$(EQT)
+VAS=	@echo $(EQT)   [AS]   $@$(EQT)
+VDEP=	@echo $(EQT)   [DEP]  $@$(EQT)
+VLD=	@echo $(EQT)   [LD]   $@$(EQT)
+VAR=	@echo $(EQT)   [AR]   $@$(EQT)
+VRES=   @echo $(EQT)   [RES]  $@$(EQT)
+VCCLD=	@echo $(EQT)   [CCLD] $@$(EQT)
+VSTRP=  @echo $(EQT)   [STRP] $<$(EQT)
+VMD=	@echo $(EQT)   [MD]   $@$(EQT)
+VGEN=	@echo $(EQT)   [GEN]  $@$(EQT)
+VGENT=	@echo $(EQT)   [GEN]  $@: $(VTAGS)$(EQT)
 VR:=	@
 endif
 
