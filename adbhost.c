@@ -5,11 +5,18 @@
 
 #define ADB "C:\\Storage\\android\\ADB_Fastboot_Windows\\adb.exe"
 
-int main(void)
+int main(int argc, char **argv)
 {
     char *line;
+
+    if (argc != 2)
+    {
+        fprintf(stderr, "Usage: %s <path to adb>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
     puts("[adbhost] ADB Host tests");
-    AdbConnect *connect = AdbConnect_create(ADB);
+    AdbConnect *connect = AdbConnect_create(argv[1]);
     puts("[adbhost] Connector created");
 
     while ((line = AdbConnect_readLine(connect, 4000, 500))) free(line);
@@ -50,5 +57,7 @@ int main(void)
     AdbConnect_write(connect, "exit\n");
     while ((line = AdbConnect_readLine(connect, 500, 0))) free(line);
     AdbConnect_destroy(connect);
+
+    return EXIT_SUCCESS;
 }
 
