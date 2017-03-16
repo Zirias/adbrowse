@@ -10,6 +10,7 @@
 struct AdbConnect
 {
     const char *executable;
+    HANDLE adbprocess;
     HANDLE adbin_wr;
     HANDLE adbout_rd;
     char inbuf[BUFSIZE];
@@ -107,7 +108,7 @@ AdbConnect *AdbConnect_create(const char *executable)
     si.dwFlags |= STARTF_USESTDHANDLES;
     memset(&pi, 0, sizeof(pi));
     CreateProcess(0, self->outbuf, 0, 0, 1, 0, 0, 0, &si, &pi);
-    CloseHandle(pi.hProcess);
+    self->adbprocess = pi.hProcess;
     CloseHandle(pi.hThread);
     CloseHandle(adbin_rd);
     CloseHandle(adbout_wr);
@@ -144,6 +145,9 @@ void AdbConnect_destroy(AdbConnect *self)
     CloseHandle(self->adbin_wr);
     CloseHandle(self->adbout_rd);
     CloseHandle(self->rdover.hEvent);
+    TerminateProcess(self->adbprocess, 0);
+    WaitForSingleObject(self->adbprocess, INFINITE);
+    CloseHandle(self->adbprocess);
     free(self);
 }
 
