@@ -84,9 +84,9 @@ AdbConnect *AdbConnect_create(const char *executable)
     }
 }
 
-char *AdbConnect_readLine(AdbConnect *self, int timeout)
+char *AdbConnect_readLine(AdbConnect *self, int timeout, int contTimeout)
 {
-    return BufReader_readLine(self->outbufReader, timeout);
+    return BufReader_readLine(self->outbufReader, timeout, contTimeout);
 }
 
 void AdbConnect_destroy(AdbConnect *self)

@@ -25,8 +25,9 @@ BufReader *BufReader_create(void *buffer,
     self->fillBufferArg = fillBufferArg;
 }
 
-char *BufReader_readLine(BufReader *self, int timeout)
+char *BufReader_readLine(BufReader *self, int timeout, int contTimeout)
 {
+    if (!contTimeout) contTimeout = 50 > timeout ? timeout : 50;
     for (;;)
     {
         while (self->pos < self->len)
@@ -43,6 +44,7 @@ char *BufReader_readLine(BufReader *self, int timeout)
         }
         self->pos = 0;
         self->len = self->fillBuffer(timeout, self->fillBufferArg);
+        timeout = contTimeout;
         if (!self->len) return 0;
     }
 }
