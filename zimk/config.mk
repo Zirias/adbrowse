@@ -53,7 +53,7 @@ CFLAGS+= $(USECFLAGS)
 VTAGS+= USECFLAGS=$(strip $(USECFLAGS))
 endif
 
-VTAGS:= $(VTAGS)]
+VTAGS+= ]
 
 CLEAN+= $(CONFIG)
 
@@ -68,6 +68,10 @@ OBJDIR?=$(OBJBASEDIR)$(PSEP)$(CFGNAME)
 BINDIR?=$(BINBASEDIR)$(PSEP)$(CFGNAME)
 LIBDIR?=$(LIBBASEDIR)$(PSEP)$(CFGNAME)
 
+ifeq ($(PLATFORM),win32)
+LDFLAGS?=-static-libgcc -static-libstdc++ -L$(LIBDIR)
+else
 LDFLAGS?=-L$(LIBDIR)
+endif
 
 # vim: noet:si:ts=8:sts=8:sw=8
