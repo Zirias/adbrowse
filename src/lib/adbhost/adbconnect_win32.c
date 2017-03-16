@@ -84,6 +84,7 @@ AdbConnect *AdbConnect_create(const char *executable)
     AdbConnect *self = calloc(1, sizeof(AdbConnect));
     self->executable = executable;
 
+    char windir[MAX_PATH];
     SECURITY_ATTRIBUTES sa;
     PROCESS_INFORMATION pi;
     STARTUPINFO si;
@@ -108,7 +109,8 @@ AdbConnect *AdbConnect_create(const char *executable)
     si.hStdInput = adbin_rd;
     si.dwFlags |= STARTF_USESTDHANDLES;
     memset(&pi, 0, sizeof(pi));
-    CreateProcess(0, self->outbuf, 0, 0, 1, 0, 0, 0, &si, &pi);
+    GetEnvironmentVariable("windir", windir, MAX_PATH);
+    CreateProcess(0, self->outbuf, 0, 0, 1, 0, 0, windir, &si, &pi);
     self->adbprocess = pi.hProcess;
     CloseHandle(pi.hThread);
     CloseHandle(adbin_rd);
