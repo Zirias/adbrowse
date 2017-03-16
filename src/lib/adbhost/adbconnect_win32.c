@@ -1,5 +1,6 @@
-#include "adbconnect.h"
+#include <adbhost/adbconnect.h>
 #include "bufreader.h"
+
 #include <windows.h>
 #include <string.h>
 #include <stdlib.h>

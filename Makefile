@@ -1,24 +1,7 @@
-ifdef DEBUG
-CFLAGS ?= -O0 -g3
-else
-CFLAGS ?= -O3 -g0
-endif
+include zimk.mk
 
-CC ?= gcc
+INCLUDES:= -I.$(PSEP)include
 
-CFLAGS += -Wall -Wextra -pedantic
+include src$(PSEP)src.mk
 
-ADBHOST_OBJS = adbhost.o adbconnect_win32.o stringbuilder.o bufreader.o
-
-all: adbhost.exe
-
-%.o: %.c
-	$(CC) -c $(CFLAGS) -o$@ $^
-
-adbhost.exe: $(ADBHOST_OBJS)
-	$(CC) -o$@ $^
-
-clean:
-	rm -f *.o *.exe
-
-.PHONY: all clean
+# vim: noet:si:ts=8:sts=8:sw=8

@@ -1,4 +1,4 @@
-#include "adbconnect.h"
+#include <adbhost/adbconnect.h>
 
 #include <stdlib.h>
 #include <stdio.h>

@@ -1,9 +1,14 @@
 .*.swp
 *.o
+*.d
 *.exe
+conf_*.mk
 *.files
 *.config
 *.includes
 *.creator
 *.user
-adbhost
+/bin/
+/lib/
+/obj/
+
