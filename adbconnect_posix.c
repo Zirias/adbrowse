@@ -14,6 +14,7 @@
 
 struct AdbConnect
 {
+    const char *executable;
     pid_t adbpid;
     int adbin_wr;
     int adbout_rd;
@@ -64,6 +65,7 @@ AdbConnect *AdbConnect_create(const char *executable)
         close(adbout[P_OUT]);
 
         AdbConnect *self = malloc(sizeof(AdbConnect));
+        self->executable = executable;
         self->adbpid = pid;
         self->adbin_wr = adbin[P_OUT];
         self->adbout_rd = adbout[P_IN];
