@@ -70,6 +70,7 @@ AdbConnect *AdbConnect_create(const char *executable)
         self->adbin_wr = adbin[P_OUT];
         self->adbout_rd = adbout[P_IN];
         self->outbufReader = BufReader_create(&(self->inbuf), fillOutBuf, self);
+        return self;
     }
     else
     {

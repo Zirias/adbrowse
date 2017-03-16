@@ -23,6 +23,7 @@ BufReader *BufReader_create(void *buffer,
     self->builder = StringBuilder_create(0);
     self->fillBuffer = fillBuffer;
     self->fillBufferArg = fillBufferArg;
+    return self;
 }
 
 char *BufReader_readLine(BufReader *self, int timeout, int contTimeout)

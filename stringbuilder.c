@@ -20,6 +20,7 @@ StringBuilder *StringBuilder_create(size_t capacity)
     self->initial_capacity = capacity;
     self->content = 0;
     self->length = 0;
+    return self;
 }
 
 void StringBuilder_appendChar(StringBuilder *self, char character)
@@ -45,7 +46,7 @@ void StringBuilder_appendChar(StringBuilder *self, char character)
 void StringBuilder_appendStr(StringBuilder *self, const char *string)
 {
     char c;
-    while (c = *string++)
+    while ((c = *string++))
     {
         StringBuilder_appendChar(self, c);
     }

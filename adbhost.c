@@ -12,18 +12,18 @@ int main(void)
     AdbConnect *connect = AdbConnect_create(ADB);
     puts("[adbhost] Connector created");
 
-    while (line = AdbConnect_readLine(connect, 4000, 500)) free(line);
+    while ((line = AdbConnect_readLine(connect, 4000, 500))) free(line);
 
     AdbConnect_write(connect, "unset PS1\n");
-    while (line = AdbConnect_readLine(connect, 500, 0)) free(line);
+    while ((line = AdbConnect_readLine(connect, 500, 0))) free(line);
 
     AdbConnect_write(connect, "su\n");
-    while (line = AdbConnect_readLine(connect, 500, 0)) free(line);
+    while ((line = AdbConnect_readLine(connect, 500, 0))) free(line);
 
     puts("\n[adbhost] getting root directory");
     AdbConnect_write(connect, "ls -l /\n");
     free(AdbConnect_readLine(connect, 500, 0));
-    while (line = AdbConnect_readLine(connect, 500, 0))
+    while ((line = AdbConnect_readLine(connect, 500, 0)))
     {
         fputs(line, stdout);
         free(line);
@@ -32,7 +32,7 @@ int main(void)
     puts("\n[adbhost] getting system directory");
     AdbConnect_write(connect, "ls -l /system\n");
     free(AdbConnect_readLine(connect, 500, 0));
-    while (line = AdbConnect_readLine(connect, 500, 0))
+    while ((line = AdbConnect_readLine(connect, 500, 0)))
     {
         fputs(line, stdout);
         free(line);
@@ -41,14 +41,14 @@ int main(void)
     puts("\n[adbhost] getting data directory");
     AdbConnect_write(connect, "ls -l /data\n");
     free(AdbConnect_readLine(connect, 500, 0));
-    while (line = AdbConnect_readLine(connect, 500, 0))
+    while ((line = AdbConnect_readLine(connect, 500, 0)))
     {
         fputs(line, stdout);
         free(line);
     }
 
     AdbConnect_write(connect, "exit\n");
-    while (line = AdbConnect_readLine(connect, 500, 0)) free(line);
+    while ((line = AdbConnect_readLine(connect, 500, 0))) free(line);
     AdbConnect_destroy(connect);
 }
 

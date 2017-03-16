@@ -58,7 +58,7 @@ static int mkpipe(HANDLE *read, HANDLE *write,
     HANDLE rd, wr;
     DWORD size = 4096;
 
-    snprintf(name, MAX_PATH, "\\\\.\\Pipe\\RemoteExeAnon.%08x.%08x",
+    snprintf(name, MAX_PATH, "\\\\.\\Pipe\\RemoteExeAnon.%08lx.%08lx",
             GetCurrentProcessId(), InterlockedIncrement(&serial));
     rd = CreateNamedPipeA(name, PIPE_ACCESS_INBOUND|rdMode,
             PIPE_TYPE_BYTE|PIPE_WAIT, 1, size, size, 120000, rdattr);
@@ -86,8 +86,8 @@ AdbConnect *AdbConnect_create(const char *executable)
     SECURITY_ATTRIBUTES sa;
     PROCESS_INFORMATION pi;
     STARTUPINFO si;
-    HANDLE adbin_rd;
-    HANDLE adbout_wr;
+    HANDLE adbin_rd = INVALID_HANDLE_VALUE;
+    HANDLE adbout_wr = INVALID_HANDLE_VALUE;
 
     sa.nLength = sizeof(SECURITY_ATTRIBUTES);
     sa.bInheritHandle = 1;
@@ -137,6 +137,7 @@ int AdbConnect_write(AdbConnect *self, const char *str)
         }
     } while (c);
     if (pos) WriteFile(self->adbin_wr, self->inbuf, pos, 0, 0);
+    return 1;
 }
 
 void AdbConnect_destroy(AdbConnect *self)
