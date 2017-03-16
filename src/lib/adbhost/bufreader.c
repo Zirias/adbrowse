@@ -1,4 +1,6 @@
 #include "bufreader.h"
+
+#include <adbhost/common.h>
 #include "stringbuilder.h"
 
 #include <stdlib.h>
@@ -13,7 +15,7 @@ struct BufReader
     void *fillBufferArg;
 };
 
-BufReader *BufReader_create(void *buffer,
+SOLOCAL BufReader *BufReader_create(void *buffer,
         BufReader_fillBuffer fillBuffer, void *fillBufferArg)
 {
     BufReader *self = malloc(sizeof(BufReader));
@@ -26,7 +28,7 @@ BufReader *BufReader_create(void *buffer,
     return self;
 }
 
-char *BufReader_readLine(BufReader *self, int timeout, int contTimeout)
+SOLOCAL char *BufReader_readLine(BufReader *self, int timeout, int contTimeout)
 {
     if (!contTimeout) contTimeout = 50 > timeout ? timeout : 50;
     for (;;)
@@ -50,7 +52,7 @@ char *BufReader_readLine(BufReader *self, int timeout, int contTimeout)
     }
 }
 
-void BufReader_destroy(BufReader *self)
+SOLOCAL void BufReader_destroy(BufReader *self)
 {
     StringBuilder_destroy(self->builder);
     free(self);

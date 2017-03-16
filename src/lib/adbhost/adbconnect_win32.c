@@ -79,7 +79,7 @@ static int mkpipe(HANDLE *read, HANDLE *write,
     return 1;
 }
 
-AdbConnect *AdbConnect_create(const char *executable)
+SOEXPORT AdbConnect *AdbConnect_create(const char *executable)
 {
     AdbConnect *self = calloc(1, sizeof(AdbConnect));
     self->executable = executable;
@@ -120,12 +120,12 @@ AdbConnect *AdbConnect_create(const char *executable)
     return self;
 }
 
-char *AdbConnect_readLine(AdbConnect *self, int timeout, int contTimeout)
+SOEXPORT char *AdbConnect_readLine(AdbConnect *self, int timeout, int contTimeout)
 {
     return BufReader_readLine(self->outbufReader, timeout, contTimeout);
 }
 
-int AdbConnect_write(AdbConnect *self, const char *str)
+SOEXPORT int AdbConnect_write(AdbConnect *self, const char *str)
 {
     char c;
     size_t pos = 0;
@@ -143,7 +143,7 @@ int AdbConnect_write(AdbConnect *self, const char *str)
     return 1;
 }
 
-void AdbConnect_destroy(AdbConnect *self)
+SOEXPORT void AdbConnect_destroy(AdbConnect *self)
 {
     BufReader_destroy(self->outbufReader);
     CloseHandle(self->adbin_wr);

@@ -1,14 +1,16 @@
 #ifndef ADBCONNECT_H
 #define ADBCONNECT_H
 
+#include <adbhost/common.h>
+
 typedef struct AdbConnect AdbConnect;
 
-AdbConnect *AdbConnect_create(const char *executable);
+DECLEXPORT AdbConnect *AdbConnect_create(const char *executable);
 
-char *AdbConnect_readLine(AdbConnect *self, int timeout, int contTimeout);
-int AdbConnect_write(AdbConnect *self, const char *str);
+DECLEXPORT char *AdbConnect_readLine(AdbConnect *self, int timeout, int contTimeout);
+DECLEXPORT int AdbConnect_write(AdbConnect *self, const char *str);
 
-void AdbConnect_destroy(AdbConnect *self);
+DECLEXPORT void AdbConnect_destroy(AdbConnect *self);
 
 #endif
 

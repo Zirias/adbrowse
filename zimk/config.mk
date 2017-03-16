@@ -70,6 +70,7 @@ LIBDIR?=$(LIBBASEDIR)$(PSEP)$(CFGNAME)
 
 ifeq ($(PLATFORM),win32)
 LDFLAGS?=-static-libgcc -static-libstdc++ -L$(LIBDIR)
+DEFINES+=-DWIN32
 else
 LDFLAGS?=-L$(LIBDIR)
 endif

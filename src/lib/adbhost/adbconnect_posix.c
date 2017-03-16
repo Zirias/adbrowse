@@ -49,7 +49,7 @@ static size_t fillOutBuf(int timeout, void *arg)
     }
 }
 
-AdbConnect *AdbConnect_create(const char *executable)
+SOEXPORT AdbConnect *AdbConnect_create(const char *executable)
 {
     int adbin[2];
     int adbout[2];
@@ -85,12 +85,12 @@ AdbConnect *AdbConnect_create(const char *executable)
     }
 }
 
-char *AdbConnect_readLine(AdbConnect *self, int timeout, int contTimeout)
+SOEXPORT char *AdbConnect_readLine(AdbConnect *self, int timeout, int contTimeout)
 {
     return BufReader_readLine(self->outbufReader, timeout, contTimeout);
 }
 
-void AdbConnect_destroy(AdbConnect *self)
+SOEXPORT void AdbConnect_destroy(AdbConnect *self)
 {
     BufReader_destroy(self->outbufReader);
     close(self->adbin_wr);
