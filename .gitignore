@@ -1,0 +1,9 @@
+.*.swp
+*.o
+*.exe
+*.files
+*.config
+*.includes
+*.creator
+*.user
+adbhost

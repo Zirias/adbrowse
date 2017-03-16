@@ -1,0 +1,17 @@
+#ifndef BUFREADER_H
+#define BUFREADER_H
+
+#include <stddef.h>
+
+typedef struct BufReader BufReader;
+
+typedef size_t (*BufReader_fillBuffer)(int timeout, void *arg);
+
+BufReader *BufReader_create(void *buffer,
+        BufReader_fillBuffer fillBuffer, void *fillBufferArg);
+
+char *BufReader_readLine(BufReader *self, int timeout);
+
+void BufReader_destroy(BufReader *self);
+
+#endif
