@@ -1,12 +1,13 @@
-#include <adbhost/adbconnect.h>
-#include "bufreader.h"
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/select.h>
 #include <sys/wait.h>
+
+#include "bufreader.h"
+
+#include <adbhost/adbconnect.h>
 
 #define BUFSIZE 4096
 #define P_IN 0

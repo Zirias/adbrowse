@@ -3,6 +3,8 @@
 
 #include <stddef.h>
 
+#include <adbhost/decl.h>
+
 typedef struct BufReader BufReader;
 
 typedef size_t (*BufReader_fillBuffer)(int timeout, void *arg);

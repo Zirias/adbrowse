@@ -1,7 +1,7 @@
 #ifndef ADBCONNECT_H
 #define ADBCONNECT_H
 
-#include <adbhost/common.h>
+#include <adbhost/decl.h>
 
 typedef struct AdbConnect AdbConnect;
 

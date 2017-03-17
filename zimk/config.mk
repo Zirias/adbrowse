@@ -53,7 +53,7 @@ CFLAGS+= $(USECFLAGS)
 VTAGS+= USECFLAGS=$(strip $(USECFLAGS))
 endif
 
-VTAGS+= ]
+VTAGS:= $(VTAGS)]
 
 CLEAN+= $(CONFIG)
 

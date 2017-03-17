@@ -1,10 +1,11 @@
-#include <adbhost/adbconnect.h>
-#include "bufreader.h"
-
 #include <windows.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+#include "bufreader.h"
+
+#include <adbhost/adbconnect.h>
 
 #define BUFSIZE 4096
 
